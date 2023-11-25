@@ -8,6 +8,7 @@ import racingcar.common.validate.Validate;
 
 public class Cars {
     private static final int carMaxLength = 5;
+
     private List<String> cars = new ArrayList<>();
 
     public Cars(String carsCsv) {
