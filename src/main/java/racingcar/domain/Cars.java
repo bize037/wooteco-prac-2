@@ -20,8 +20,8 @@ public class Cars {
     }
 
     private void validateCarsCsv(String carsCsv) {
-        Validate.checkStringBlank(carsCsv);
+        Validate.checkStringNotBlank(carsCsv);
         Validate.checkStringCsvLengthNotExceeding(carsCsv, carMaxLength);
-        Validate.checkListDuplicates(Arrays.asList(carsCsv.split(Unit.COMMA.getUnit())));
+        Validate.checkListNotDuplicates(Arrays.asList(carsCsv.split(Unit.COMMA.getUnit())));
     }
 }
