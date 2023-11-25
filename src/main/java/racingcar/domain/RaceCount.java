@@ -7,7 +7,7 @@ public class RaceCount {
 
     public RaceCount(String raceCountText) {
         validateRaceCountText(raceCountText);
-        raceCount = Integer.parseInt(raceCountText);
+        this.raceCount = Integer.parseInt(raceCountText);
     }
 
     public int getRaceCount() {
