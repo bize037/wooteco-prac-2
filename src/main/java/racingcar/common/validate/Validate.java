@@ -21,7 +21,7 @@ public class Validate {
     }
 
     private static void checkStringLengthNotExceeding(String input, int maxLength) {
-        if (input.length() >= maxLength) {
+        if (input.length() > maxLength) {
             throw new IllegalArgumentException();
         }
     }
