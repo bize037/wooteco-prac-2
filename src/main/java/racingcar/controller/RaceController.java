@@ -12,6 +12,8 @@ import racingcar.view.OutputView;
 
 public class RaceController {
     private static final int INIT_STATUS_NUMBER = 0;
+    private static final int DEFAULT_RACE_INDEX = 0;
+    private static final int DEFAULT_CAR_STATUS = 0;
 
     private Cars cars;
     private RaceCount raceCount;
@@ -39,7 +41,7 @@ public class RaceController {
 
     private void runRaceIteration(HashMap<String, Integer> carsStatus, int raceCount) {
         HashMap<String, Integer> newCarsStatus = carsStatus;
-        for (int raceIndex = 0; raceIndex < raceCount; raceIndex++) {
+        for (int raceIndex = DEFAULT_RACE_INDEX; raceIndex < raceCount; raceIndex++) {
             race = new Race(newCarsStatus);
             newCarsStatus = race.getCarStatusLogs();
             OutputView.printCarsStatus(newCarsStatus);
@@ -69,6 +71,6 @@ public class RaceController {
                 .stream()
                 .mapToInt(Integer::intValue)
                 .max()
-                .orElse(0);
+                .orElse(DEFAULT_CAR_STATUS);
     }
 }
