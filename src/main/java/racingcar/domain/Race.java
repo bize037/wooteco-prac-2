@@ -4,6 +4,12 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.HashMap;
 
 public class Race {
+    private static final int MIN_RANDOM_PICK_NUMBER = 0;
+    private static final int MAX_RANDOM_PICK_NUMBER = 9;
+    private static final int FORWARD_THRESHOLD_RANDOM_PICK_NUMBER = 4;
+    private static final int FORWARD_DISTANCE = 1;
+    private static final int NOT_FORWARD_DISTANCE = 0;
+
     private HashMap<String, Integer> carStatusLogs = new HashMap<>();
 
     public Race(HashMap<String, Integer> carsStatus) {
@@ -22,9 +28,9 @@ public class Race {
     }
 
     private int decideDriveForward() {
-        if (Randoms.pickNumberInRange(0, 9) >= 4) {
-            return 1;
+        if (Randoms.pickNumberInRange(MIN_RANDOM_PICK_NUMBER, MAX_RANDOM_PICK_NUMBER) >= FORWARD_THRESHOLD_RANDOM_PICK_NUMBER) {
+            return FORWARD_DISTANCE;
         }
-        return 0;
+        return NOT_FORWARD_DISTANCE;
     }
 }
