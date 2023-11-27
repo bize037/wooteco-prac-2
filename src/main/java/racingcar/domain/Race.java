@@ -2,24 +2,18 @@ package racingcar.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Race {
     private HashMap<String, Integer> carStatusLogs = new HashMap<>();
 
-    public Race(List<String> cars, int raceCount) {
-        this.carStatusLogs = racing(initCarStatus(cars), raceCount);
+    public Race(HashMap<String, Integer> carsStatus, int raceCount) {
+        this.carStatusLogs = racing(carsStatus, raceCount);
     }
 
     public HashMap<String, Integer> getCarStatusLogs() {
         return carStatusLogs;
     }
 
-    private HashMap<String, Integer> initCarStatus(List<String> cars) {
-        return (HashMap<String, Integer>) cars.stream()
-                .collect(Collectors.toMap(key -> key, value -> 0));
-    }
 
     private HashMap<String, Integer> racing(HashMap<String, Integer> carStatus, int raceCount) {
         HashMap<String, Integer> newCarStatus = new HashMap<>();
