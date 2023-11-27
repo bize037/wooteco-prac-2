@@ -20,9 +20,11 @@ public class RaceController {
     }
 
     private void runRaceIteration(HashMap<String, Integer> carStatus, int raceCount) {
+        HashMap<String, Integer> newCarStatus = carStatus;
         for (int raceIndex = 0; raceIndex < raceCount; raceIndex++) {
-            race = new Race(carStatus);
-            OutputView.printCarStatus(race.getCarStatusLogs());
+            race = new Race(newCarStatus);
+            newCarStatus = race.getCarStatusLogs();
+            OutputView.printCarStatus(newCarStatus);
         }
     }
 
