@@ -1,7 +1,9 @@
 package racingcar.common.constants;
 
 public enum Unit {
-    COMMA(",");
+    COMMA(","),
+    HYPHEN("-"),
+    COLON(":");
 
     private static final String SPACE = " ";
 
@@ -17,5 +19,9 @@ public enum Unit {
 
     public String getUnitSpace() {
         return unit + SPACE;
+    }
+
+    public String getSpaceUnitSpace() {
+        return SPACE + unit + SPACE;
     }
 }
