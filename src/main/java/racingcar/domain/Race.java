@@ -14,16 +14,6 @@ public class Race {
         return carStatusLogs;
     }
 
-    /*
-    private HashMap<String, Integer> racing(HashMap<String, Integer> carStatus, int raceCount) {
-        HashMap<String, Integer> newCarStatus = new HashMap<>();
-        for (int raceIndex = 0; raceIndex < raceCount; raceIndex++) {
-            newCarStatus = driveForward(carStatus);
-        }
-        return newCarStatus;
-    }
-     */
-
     private HashMap<String, Integer> driveForward(HashMap<String, Integer> carStatus) {
         carStatus.forEach((car, forwardStatus) -> {
             carStatus.put(car, forwardStatus + decideDriveForward());
