@@ -40,7 +40,7 @@ public class Validate {
     }
 
     public static void checkStringPositiveInteger(String input) {
-        if (Integer.parseInt(input) >= POSITIVE_LOWER_BOUND) {
+        if (Integer.parseInt(input) <= POSITIVE_LOWER_BOUND) {
             throw new IllegalArgumentException();
         }
     }
