@@ -3,6 +3,7 @@ package racingcar.controller;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import racingcar.domain.Cars;
 import racingcar.domain.Race;
@@ -14,32 +15,60 @@ public class RaceController {
 
     private Cars cars;
     private RaceCount raceCount;
+    private Race race;
 
     public void start() {
-        String a = Console.readLine();
-        String b = Console.readLine();
-        cars = new Cars(a);
-        raceCount = new RaceCount(b);
+        enterCars();
+        enterRaceCount();
         runRace(cars.getCars(), raceCount.getRaceCount());
+        announceWinner();
+    }
+
+    private void enterCars() {
+        cars = new Cars(Console.readLine());
+    }
+
+    private void enterRaceCount() {
+        raceCount = new RaceCount(Console.readLine());
     }
 
     private void runRace(List<String> cars, int raceCount) {
         OutputView.printCarsStatusMessage();
-        runRaceIteration(initCarStatus(cars), raceCount);
+        runRaceIteration(initCarsStatus(cars), raceCount);
     }
 
     private void runRaceIteration(HashMap<String, Integer> carsStatus, int raceCount) {
         HashMap<String, Integer> newCarsStatus = carsStatus;
         for (int raceIndex = 0; raceIndex < raceCount; raceIndex++) {
-            Race race = new Race(newCarsStatus);
+            race = new Race(newCarsStatus);
             newCarsStatus = race.getCarStatusLogs();
             OutputView.printCarsStatus(newCarsStatus);
         }
-        Race race = new Race(newCarsStatus);
+        race = new Race(newCarsStatus);
     }
 
-    private HashMap<String, Integer> initCarStatus(List<String> cars) {
+    private void announceWinner() {
+        OutputView.printAnnounceWinner(getAnnounceWinner(race.getCarStatusLogs()));
+    }
+
+    private HashMap<String, Integer> initCarsStatus(List<String> cars) {
         return (HashMap<String, Integer>) cars.stream()
                 .collect(Collectors.toMap(key -> key, value -> INIT_STATUS_NUMBER));
+    }
+
+    private List<String> getAnnounceWinner(HashMap<String, Integer> carsStatus) {
+        return carsStatus.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() == maxStatus(carsStatus))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
+    private int maxStatus(HashMap<String, Integer> carsStatus) {
+        return carsStatus.values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .max()
+                .orElse(0);
     }
 }
