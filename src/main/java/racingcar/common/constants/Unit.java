@@ -7,7 +7,7 @@ public enum Unit {
 
     private static final String SPACE = " ";
 
-    private String unit;
+    private final String unit;
 
     Unit(String unit) {
         this.unit = unit;
