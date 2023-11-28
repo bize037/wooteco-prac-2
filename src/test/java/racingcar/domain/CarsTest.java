@@ -18,7 +18,7 @@ public class CarsTest {
     }
 
     @DisplayName("공백이 들어올 시 예외 처리 되는가")
-    @ValueSource(strings = {""})
+    @ValueSource(strings = {"", " "})
     @ParameterizedTest
     void validateCarsCsvNotBlank(String inputCarsCsv) {
         assertThatThrownBy(() -> new Cars(inputCarsCsv))
