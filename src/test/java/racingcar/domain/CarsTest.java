@@ -12,8 +12,8 @@ public class CarsTest {
     @DisplayName("문자열로 들어온 자동차 이름들이 ,를 기준으로 리스트 형태로 저장되는가")
     @ValueSource(strings = {"qwer,asdf,zxcv,tyu", "ter,gdf,v,wwe", "qerdd"})
     @ParameterizedTest
-    void saveCarsStringToCarsList(String carsCsv) {
-        Cars cars = new Cars(carsCsv);
-        assertThat(cars.getCars()).isEqualTo(Arrays.asList(carsCsv.split(Unit.COMMA.getUnit())));
+    void saveCarsStringToCarsList(String inputCarsCsv) {
+        Cars cars = new Cars(inputCarsCsv);
+        assertThat(cars.getCars()).isEqualTo(Arrays.asList(inputCarsCsv.split(Unit.COMMA.getUnit())));
     }
 }
