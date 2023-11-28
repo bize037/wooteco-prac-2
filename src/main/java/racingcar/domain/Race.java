@@ -22,12 +22,12 @@ public class Race {
 
     private HashMap<String, Integer> driveForward(HashMap<String, Integer> carStatus) {
         carStatus.forEach((car, forwardStatus) -> {
-            carStatus.put(car, forwardStatus + decideDriveForward());
+            carStatus.put(car, forwardStatus + decideForwardOrNot());
         });
         return carStatus;
     }
 
-    private int decideDriveForward() {
+    private int decideForwardOrNot() {
         if (Randoms.pickNumberInRange(MIN_RANDOM_PICK_NUMBER, MAX_RANDOM_PICK_NUMBER) >= FORWARD_THRESHOLD_RANDOM_PICK_NUMBER) {
             return FORWARD_DISTANCE;
         }
