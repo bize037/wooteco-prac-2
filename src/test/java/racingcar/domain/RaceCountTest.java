@@ -1,6 +1,7 @@
 package racingcar.domain;
 
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.*;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -11,6 +12,30 @@ public class RaceCountTest {
     @ParameterizedTest
     void saveRaceCountStringToRaceCountInteger(String inputRaceCount) {
         RaceCount raceCount = new RaceCount(inputRaceCount);
-        Assertions.assertThat(raceCount.getRaceCount()).isEqualTo(Integer.parseInt(inputRaceCount));
+        assertThat(raceCount.getRaceCount()).isEqualTo(Integer.parseInt(inputRaceCount));
+    }
+
+    @DisplayName("공백이 입력된 경우 예외 처리 되는가")
+    @ValueSource(strings = {"", " "})
+    @ParameterizedTest
+    void validateRaceCountNotBlank(String inputRaceCount) {
+        assertThatThrownBy(() -> new RaceCount(inputRaceCount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("문자가 입력된 경우 예외 처리 되는가")
+    @ValueSource(strings = {"1asdf", "pass5", "a"})
+    @ParameterizedTest
+    void validateRaceCountNotCharacter(String inputRaceCount) {
+        assertThatThrownBy(() -> new RaceCount(inputRaceCount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("양의 정수가 아닌 숫자가 입력된 경우 예외 처리 되는가")
+    @ValueSource(strings = {"0", "-1", "1.5"})
+    @ParameterizedTest
+    void validateRaceCountPositiveInteger(String inputRaceCount) {
+        assertThatThrownBy(() -> new RaceCount(inputRaceCount))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
