@@ -16,4 +16,30 @@ public class CarsTest {
         Cars cars = new Cars(inputCarsCsv);
         assertThat(cars.getCars()).isEqualTo(Arrays.asList(inputCarsCsv.split(Unit.COMMA.getUnit())));
     }
+
+    @DisplayName("공백이 들어올 시 예외 처리 되는가")
+    @ValueSource(strings = {""})
+    @ParameterizedTest
+    void validateCarsCsvNotBlank(String inputCarsCsv) {
+        assertThatThrownBy(() -> new Cars(inputCarsCsv))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("입력된 자동차 이름이 지정된 길이를 넘어서면 예외 처리 되는가")
+    @ValueSource(strings = {"qwerasdf,asdf,qwer", "qwer,asdfgh,zxc", "qwerzxcv"})
+    @ParameterizedTest
+    void validateCarsCsvLengthNotExceeding(String inputCarsCsv) {
+        assertThatThrownBy(() -> new Cars(inputCarsCsv))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("자동차 이름 중 중복된 이름이 있다면 예외 처리 되는가")
+    @ValueSource(strings = {"asdf,asdf,qwer", "qwer,zxc,asdf,zxc", "qwerzxcv,qwerzxcv"})
+    @ParameterizedTest
+    void validateCarsCsvNotDuplicates(String inputCarsCsv) {
+        assertThatThrownBy(() -> new Cars(inputCarsCsv))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+
 }
