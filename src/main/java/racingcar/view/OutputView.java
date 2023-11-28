@@ -2,11 +2,12 @@ package racingcar.view;
 
 import java.util.HashMap;
 import java.util.List;
+import racingcar.common.constants.Message;
 import racingcar.common.constants.Unit;
 
 public class OutputView {
     public static void printCarsStatusMessage() {
-        System.out.println("실행 결과");
+        System.out.println(Message.OUTPUT_CARS_STATUS.getMessage());
     }
 
     public static void printCarsStatus(HashMap<String, Integer> carsStatus) {
@@ -17,6 +18,7 @@ public class OutputView {
     }
 
     public static void printAnnounceWinner(List<String> announceWinner) {
-
+        System.out.print(Message.OUTPUT_WINNERS.getMessage() + Unit.COLON.getSpaceUnitSpace());
+        System.out.println(String.join(Unit.COMMA.getUnitSpace(), announceWinner));
     }
 }
