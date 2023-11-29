@@ -14,8 +14,8 @@ public class RaceTest {
     @DisplayName("자동차의 상태가 그대로거나 FORWARD_DISTANCE만큼 전진한 상태로 저장되는가")
     @MethodSource("carsStatus")
     @ParameterizedTest
-    void saveRaceCountStringToRaceCountInteger(HashMap<String, Integer> inputCarsStatus) {
-        HashMap<String, Integer> carsStatus = new HashMap<>(inputCarsStatus);
+    void saveRaceCountStringToRaceCountInteger(HashMap<Car, Integer> inputCarsStatus) {
+        HashMap<Car, Integer> carsStatus = new HashMap<>(inputCarsStatus);
         Race race = new Race(inputCarsStatus);
 
         race.getCarStatusLogs().forEach((car, status) -> {
@@ -23,21 +23,21 @@ public class RaceTest {
         });
     }
 
-    private static Stream<HashMap<String, Integer>> carsStatus() {
-        HashMap<String, Integer> carsStatusCase1 = new HashMap<>();
-        carsStatusCase1.put("qwer", 4);
-        carsStatusCase1.put("asdf", 2);
-        carsStatusCase1.put("zxcv", 2);
+    private static Stream<HashMap<Car, Integer>> carsStatus() {
+        HashMap<Car, Integer> carsStatusCase1 = new HashMap<>();
+        carsStatusCase1.put(new Car("qwer"), 4);
+        carsStatusCase1.put(new Car("asdf"), 2);
+        carsStatusCase1.put(new Car("zxcv"), 2);
 
-        HashMap<String, Integer> carsStatusCase2 = new HashMap<>();
-        carsStatusCase2.put("heart", 1);
-        carsStatusCase2.put("diamond", 5);
-        carsStatusCase2.put("space", 2);
-        carsStatusCase2.put("clover", 2);
+        HashMap<Car, Integer> carsStatusCase2 = new HashMap<>();
+        carsStatusCase2.put(new Car("heart"), 1);
+        carsStatusCase2.put(new Car("diamond"), 5);
+        carsStatusCase2.put(new Car("space"), 2);
+        carsStatusCase2.put(new Car("clover"), 2);
 
-        HashMap<String, Integer> carsStatusCase3 = new HashMap<>();
-        carsStatusCase3.put("woo", 1);
-        carsStatusCase3.put("teco", 2);
+        HashMap<Car, Integer> carsStatusCase3 = new HashMap<>();
+        carsStatusCase3.put(new Car("woo"), 1);
+        carsStatusCase3.put(new Car("teco"), 2);
 
         return Stream.of(carsStatusCase1, carsStatusCase2, carsStatusCase3);
     }

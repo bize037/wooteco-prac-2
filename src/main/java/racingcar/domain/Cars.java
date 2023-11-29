@@ -3,20 +3,23 @@ package racingcar.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import racingcar.common.constants.Unit;
 import racingcar.common.validate.Validate;
 
 public class Cars {
     private static final int carMaxLength = 5;
 
-    private List<String> cars = new ArrayList<>();
+    private List<Car> cars = new ArrayList<>();
 
     public Cars(String carsCsv) {
         validateCarsCsv(carsCsv);
-        this.cars = Arrays.asList(carsCsv.split(Unit.COMMA.getUnit()));
+        this.cars = Arrays.stream(carsCsv.split(Unit.COMMA.getUnit()))
+                .map(Car::new)
+                .collect(Collectors.toList());
     }
 
-    public List<String> getCars() {
+    public List<Car> getCars() {
         return cars;
     }
 

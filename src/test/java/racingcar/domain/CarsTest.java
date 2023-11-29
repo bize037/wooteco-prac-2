@@ -3,6 +3,7 @@ package racingcar.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,7 +15,9 @@ public class CarsTest {
     @ParameterizedTest
     void saveCarsStringToCarsList(String inputCarsCsv) {
         Cars cars = new Cars(inputCarsCsv);
-        assertThat(cars.getCars()).isEqualTo(Arrays.asList(inputCarsCsv.split(Unit.COMMA.getUnit())));
+        assertThat(cars.getCars()).isEqualTo(Arrays.stream(inputCarsCsv.split(Unit.COMMA.getUnit()))
+                .map(Car::new)
+                .collect(Collectors.toList()));
     }
 
     @DisplayName("공백이 입력된 경우 예외 처리 되는가")

@@ -10,17 +10,17 @@ public class Race {
     private static final int FORWARD_DISTANCE = 1;
     private static final int NOT_FORWARD_DISTANCE = 0;
 
-    private HashMap<String, Integer> carStatusLogs = new HashMap<>();
+    private HashMap<Car, Integer> carStatusLogs = new HashMap<>();
 
-    public Race(HashMap<String, Integer> carsStatus) {
+    public Race(HashMap<Car, Integer> carsStatus) {
         this.carStatusLogs = driveForward(carsStatus);
     }
 
-    public HashMap<String, Integer> getCarStatusLogs() {
+    public HashMap<Car, Integer> getCarStatusLogs() {
         return carStatusLogs;
     }
 
-    private HashMap<String, Integer> driveForward(HashMap<String, Integer> carStatus) {
+    private HashMap<Car, Integer> driveForward(HashMap<Car, Integer> carStatus) {
         carStatus.forEach((car, forwardStatus) -> {
             carStatus.put(car, forwardStatus + decideForwardOrNot());
         });

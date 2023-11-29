@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import racingcar.domain.Car;
 import racingcar.domain.Cars;
 import racingcar.domain.Race;
 import racingcar.domain.RaceCount;
@@ -34,7 +35,7 @@ public class RaceController {
         raceCount = new RaceCount(InputView.inputRaceCount());
     }
 
-    private void runRace(List<String> cars, int raceCount) {
+    private void runRace(List<Car> cars, int raceCount) {
         OutputView.printCarsStatusMessage();
         runRaceIteration(initCarsStatus(cars), raceCount);
     }
@@ -43,13 +44,13 @@ public class RaceController {
         OutputView.printAnnounceWinner(getAnnounceWinner(race.getCarStatusLogs()));
     }
 
-    private HashMap<String, Integer> initCarsStatus(List<String> cars) {
-        return (HashMap<String, Integer>) cars.stream()
+    private HashMap<Car, Integer> initCarsStatus(List<Car> cars) {
+        return (HashMap<Car, Integer>) cars.stream()
                 .collect(Collectors.toMap(key -> key, value -> INIT_STATUS_NUMBER));
     }
 
-    private void runRaceIteration(HashMap<String, Integer> carsStatus, int raceCount) {
-        HashMap<String, Integer> newCarsStatus = carsStatus;
+    private void runRaceIteration(HashMap<Car, Integer> carsStatus, int raceCount) {
+        HashMap<Car, Integer> newCarsStatus = carsStatus;
         for (int raceIndex = DEFAULT_RACE_INDEX; raceIndex < raceCount; raceIndex++) {
             race = new Race(newCarsStatus);
             newCarsStatus = race.getCarStatusLogs();
@@ -58,7 +59,7 @@ public class RaceController {
         race = new Race(newCarsStatus);
     }
 
-    private List<String> getAnnounceWinner(HashMap<String, Integer> carsStatus) {
+    private List<Car> getAnnounceWinner(HashMap<Car, Integer> carsStatus) {
         return carsStatus.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue() == maxStatus(carsStatus))
@@ -66,7 +67,7 @@ public class RaceController {
                 .collect(Collectors.toList());
     }
 
-    private int maxStatus(HashMap<String, Integer> carsStatus) {
+    private int maxStatus(HashMap<Car, Integer> carsStatus) {
         return carsStatus.values()
                 .stream()
                 .mapToInt(Integer::intValue)
